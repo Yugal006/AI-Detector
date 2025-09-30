@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Testing - Cool Charming Rook</title>
+  <meta property="og:title" content="Testing - Cool Charming Rook" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta property="twitter:card" content="summary_large_image" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .upload-section {
+      background: linear-gradient(145deg, #6a0dad, #2874DE, #00c6ff);
+      padding: 30px 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      color: white;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .upload-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .upload-section h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    label {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    label:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    label.disabled {
+      background: rgba(255, 255, 255, 0.1);
+      cursor: not-allowed;
+    }
+
+    #preview {
+      max-width: 100%;
+      margin-top: 15px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      display: none;
+    }
+
+    #deleteBtn {
+      margin-top: 15px;
+      background: #ff4d4d;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      display: none;
+      transition: background 0.3s ease;
+    }
+
+    #deleteBtn:hover {
+      background: #e60000;
+    }
+
+    #result {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+
+  <style data-tag="reset-style-sheet">
+    html {
+      line-height: 1.15;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      border-width: 0;
+      border-style: solid;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    p,
+    li,
+    ul,
+    pre,
+    div,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    figure,
+    blockquote,
+    figcaption {
+      margin: 0;
+      padding: 0;
+    }
+
+    button {
+      background-color: transparent;
+    }
+
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+      font-family: inherit;
+      font-size: 100%;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    button,
+    select {
+      text-transform: none;
+    }
+
+    button,
+    [type="button"],
+    [type="reset"],
+    [type="submit"] {
+      -webkit-appearance: button;
+      color: inherit;
+    }
+
+    button::-moz-focus-inner,
+    [type="button"]::-moz-focus-inner,
+    [type="reset"]::-moz-focus-inner,
+    [type="submit"]::-moz-focus-inner {
+      border-style: none;
+      padding: 0;
+    }
+
+    button:-moz-focus,
+    [type="button"]:-moz-focus,
+    [type="reset"]:-moz-focus,
+    [type="submit"]:-moz-focus {
+      outline: 1px dotted ButtonText;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: inherit;
+    }
+
+    pre {
+      white-space: normal;
+    }
+
+    input {
+      padding: 2px 4px;
+    }
+
+    img {
+      display: block;
+    }
+
+    details {
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    [data-thq="accordion"] [data-thq="accordion-content"] {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out;
+      padding: 0;
+    }
+
+    [data-thq="accordion"] details[data-thq="accordion-trigger"][open]+[data-thq="accordion-content"] {
+      max-height: 1000vh;
+    }
+
+    details[data-thq="accordion-trigger"][open] summary [data-thq="accordion-icon"] {
+      transform: rotate(180deg);
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    #modalOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      /* dim background */
+      z-index: 999;
+    }
+
+    #resultModal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 30px 50px;
+      background: linear-gradient(135deg, #6a0dad, #2874DE, #00c6ff);
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      z-index: 1000;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* Smooth fade-in */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+  </style>
+  <style data-tag="default-style-sheet">
+    html {
+      font-family: "Nunito Sans";
+      font-size: 1rem;
+    }
+
+    body {
+      font-weight: 400;
+      font-style: normal;
+      text-decoration: undefined;
+      text-transform: undefined;
+      letter-spacing: normal;
+      line-height: 1.55;
+      color: var(--color-on-surface);
+      background: var(--color-surface);
+
+      fill: var(--color-on-surface);
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.css" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+    data-tag="font" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap"
+    data-tag="font" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+    data-tag="font" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+    data-tag="font" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+    data-tag="font" />
+</head>
+
+<body>
+  <link rel="stylesheet" href="./style.css" />
+  <div>
+    <link href="./testing.css" rel="stylesheet" />
+
+    <div class="testing-container1">
+      <navigation-wrapper class="navigation-wrapper">
+        <!--Navigation component-->
+        <div class="navigation-container1">
+          <div class="navigation-container2">
+            <div class="navigation-container3">
+              <style>
+                body {
+                  padding-top: 80px;
+                }
+
+                @media (max-width: 767px) {
+                  body {
+                    padding-top: 70px;
+                  }
+                }
+              </style>
+            </div>
+          </div>
+          <div class="navigation-container4">
+            <div class="navigation-container5">
+              <script defer="" data-name="navigation">
+                (function () {
+                  const navigationToggle = document.getElementById('navigationToggle')
+                  const navigationMenu = document.getElementById('navigationMenu')
+
+                  navigationToggle.addEventListener('click', function () {
+                    const isExpanded = navigationToggle.getAttribute('aria-expanded') === 'true'
+
+                    navigationToggle.setAttribute('aria-expanded', !isExpanded)
+
+                    if (!isExpanded) {
+                      navigationMenu.classList.add('navigation-menu--active')
+                    } else {
+                      navigationMenu.classList.remove('navigation-menu--active')
+                    }
+                  })
+
+                  // Close mobile menu when clicking on a link
+                  const navigationLinks = document.querySelectorAll('.navigation-link')
+                  navigationLinks.forEach((link) => {
+                    link.addEventListener('click', () => {
+                      navigationToggle.setAttribute('aria-expanded', 'false')
+                      navigationMenu.classList.remove('navigation-menu--active')
+                    })
+                  })
+
+                  // Close mobile menu when clicking outside
+                  document.addEventListener('click', function (event) {
+                    const isClickInsideNav =
+                      navigationMenu.contains(event.target) ||
+                      navigationToggle.contains(event.target)
+
+                    if (
+                      !isClickInsideNav &&
+                      navigationMenu.classList.contains('navigation-menu--active')
+                    ) {
+                      navigationToggle.setAttribute('aria-expanded', 'false')
+                      navigationMenu.classList.remove('navigation-menu--active')
+                    }
+                  })
+
+                  // Handle escape key for mobile menu
+                  document.addEventListener('keydown', function (event) {
+                    if (
+                      event.key === 'Escape' &&
+                      navigationMenu.classList.contains('navigation-menu--active')
+                    ) {
+                      navigationToggle.setAttribute('aria-expanded', 'false')
+                      navigationMenu.classList.remove('navigation-menu--active')
+                      navigationToggle.focus()
+                    }
+                  })
+                })()
+              </script>
+            </div>
+          </div>
+          <nav id="navigation" class="navigation">
+            <div class="navigation-container">
+              <div class="navigation-brand">
+                <a href="index.html">
+                  <div aria-label="AIDetecto Home" class="navigation-logo">
+                    <span class="navigation-logo-text">AIDetecto</span>
+                  </div>
+                </a>
+              </div>
+              <div id="navigationMenu" class="navigation-menu">
+                <ul class="navigation-links">
+                  <li class="navigation-item">
+                    <a href="testing.html">
+                      <div class="navigation-link"><span>Testing</span></div>
+                    </a>
+                  </li>
+                  <li class="navigation-item">
+                    <a href="contact.html">
+                      <div class="navigation-link">
+                        <span>Contact Us</span>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <button id="navigationToggle" aria-label="Toggle navigation menu" aria-controls="navigationMenu"
+                aria-expanded="false" class="navigation-toggle">
+                <span class="navigation-navigation-toggle-icon1 navigation-toggle-menu">
+                  <svg width="24" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24">
+                    <path d="M4 5h16M4 12h16M4 19h16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+                <span class="navigation-navigation-toggle-icon2">
+                  <svg width="24" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24">
+                    <path d="M18 6L6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </nav>
+        </div>
+      </navigation-wrapper>
+      <div class="testing-container2">
+        <div class="testing-container3">
+          <style>
+            * {
+              box-sizing: border-box;
+            }
+
+            body {
+              margin: 0;
+              padding: 0;
+              font-family: var(--font-family-body);
+              background-color: var(--color-surface);
+              color: var(--color-on-surface);
+              line-height: var(--line-height-normal);
+            }
+          </style>
+        </div>
+      </div>
+      <div class="testing-container4">
+        <div class="testing-container5">
+          <script defer="" data-name="testing-page">
+              (function () {
+                // Character counter for text inputs
+                const textInput = document.getElementById('textInput')
+                const charCount = document.getElementById('charCount')
+                const checkBtn = document.getElementById('checkBtn')
+                const quickTestInput = document.getElementById('quickTestInput')
+                const quickCheckBtn = document.getElementById('quickCheckBtn')
+                const resultSection = document.getElementById('result-placeholder')
+                const checkAnotherBtn = document.getElementById('checkAnotherBtn')
+
+                // Update character count
+                function updateCharCount(input, counter) {
+                  if (input && counter) {
+                    counter.textContent = input.value.length
+                  }
+                }
+
+                // Show result section with animation
+                function showResult() {
+                  resultSection.style.display = 'flex'
+                  setTimeout(() => {
+                    resultSection.classList.add('show')
+                  }, 100)
+
+                  // Smooth scroll to result
+                  resultSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                  })
+                }
+
+                // Hide result section
+                function hideResult() {
+                  resultSection.classList.remove('show')
+                  setTimeout(() => {
+                    resultSection.style.display = 'none'
+                  }, 300)
+                }
+
+                // Check text function
+                function checkText(inputElement) {
+                  const text = inputElement.value.trim()
+
+                  if (!text) {
+                    alert('Please enter some text to analyze.')
+                    return
+                  }
+
+                  if (text.length < 50) {
+                    alert('Please enter at least 50 characters for a meaningful analysis.')
+                    return
+                  }
+
+                  // Simulate processing time
+                  checkBtn.disabled = true
+                  quickCheckBtn.disabled = true
+                  checkBtn.textContent = 'Analyzing...'
+                  quickCheckBtn.textContent = 'Analyzing...'
+
+                  fetch("http://127.0.0.1:8000/analyze", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ text }),
+                  })
+                    .then((res) => res.json())
+                    .then((data) => {
+                      if (data.error) {
+                        alert(data.error);
+                        return;
+                      }
+
+                      // Update result section dynamically
+                      document.querySelector(".result-text span").textContent =
+                        `AI Probability: ${data.ai_probability * 100}%`;
+                      document.querySelector(".testing-confidence").textContent =
+                        `Confidence: ${data.confidence}`;
+
+                      const signalsList = document.querySelector(".signals-list");
+                      signalsList.innerHTML = "";
+                      data.signals.forEach(sig => {
+                        const li = document.createElement("li");
+                        li.textContent = sig;
+                        signalsList.appendChild(li);
+                      });
+
+                      showResult();
+                    })
+                    .catch(err => {
+                      alert("Error connecting to backend: " + err);
+                    });
+
+                }
+
+                // Event listeners
+                if (textInput && charCount) {
+                  textInput.addEventListener('input', () =>
+                    updateCharCount(textInput, charCount)
+                  )
+                }
+
+                if (checkBtn) {
+                  checkBtn.addEventListener('click', () => checkText(textInput))
+                }
+
+                if (quickCheckBtn) {
+                  quickCheckBtn.addEventListener('click', () => checkText(quickTestInput))
+                }
+
+                if (checkAnotherBtn) {
+                  checkAnotherBtn.addEventListener('click', () => {
+                    hideResult()
+                    textInput.value = ''
+                    quickTestInput.value = ''
+                    updateCharCount(textInput, charCount)
+
+                    // Scroll back to input area
+                    document.getElementById('input-area').scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'center',
+                    })
+                  })
+                }
+
+                // Intersection Observer for fade-in animations
+                const observerOptions = {
+                  threshold: 0.1,
+                  rootMargin: '0px 0px -50px 0px',
+                }
+
+                const observer = new IntersectionObserver((entries) => {
+                  entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                      entry.target.classList.add('visible')
+                    }
+                  })
+                }, observerOptions)
+
+                // Observe elements for fade-in animation
+                const fadeElements = document.querySelectorAll('.step-card, .faq-item')
+                fadeElements.forEach((el) => {
+                  el.classList.add('fade-in')
+                  observer.observe(el)
+                })
+
+                // Keyboard shortcuts
+                document.addEventListener('keydown', (e) => {
+                  // Ctrl/Cmd + Enter to check text
+                  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                    e.preventDefault()
+                    if (document.activeElement === textInput) {
+                      checkText(textInput)
+                    } else if (document.activeElement === quickTestInput) {
+                      checkText(quickTestInput)
+                    }
+                  }
+                })
+              })()
+          </script>
+        </div>
+      </div>
+      <section id="hero" class="hero-section">
+        <div class="hero-container1">
+          <div class="hero-content1">
+            <div class="logo-section">
+              <svg width="48" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 0 24 24" class="logo-icon">
+                <path
+                  d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                </path>
+              </svg>
+              <h1 class="hero-title">AIDetecto</h1>
+            </div>
+            <h2 class="hero-subtitle">Verify text instantly</h2>
+            <p class="section-content">
+              Paste any passage below and get a crisp, immediate signal about
+              whether it reads like AI-generated content.
+            </p>
+            <div class="hero-features">
+              <div class="feature-badge">
+                <svg width="20" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24">
+                  <path
+                    d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  </path>
+                </svg>
+                <span>Fast</span>
+              </div>
+              <div class="feature-badge">
+                <svg width="20" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24">
+                  <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                      d="M2.062 12.348a1 1 0 0 1 0-.696a10.75 10.75 0 0 1 19.876 0a1 1 0 0 1 0 .696a10.75 10.75 0 0 1-19.876 0">
+                    </path>
+                    <circle r="3" cx="12" cy="12"></circle>
+                  </g>
+                </svg>
+                <span>Clear</span>
+              </div>
+              <div class="feature-badge">
+                <svg width="20" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24">
+                  <path
+                    d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  </path>
+                </svg>
+                <span>Trustworthy</span>
+              </div>
+            </div>
+            <p class="cta-text">
+              Ready to check? Paste your text and tap Check Text for a quick,
+              no-friction result.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="input-area" class="input-section">
+        <div class="input-container">
+          <div class="input-content">
+            <div class="input-header">
+              <svg width="32" xmlns="http://www.w3.org/2000/svg" height="32" viewBox="0 0 24 24" class="input-icon">
+                <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="8" y="2" rx="1" ry="1" width="8" height="4"></rect>
+                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                </g>
+              </svg>
+              <h2 class="section-title">Paste Your Text</h2>
+            </div>
+            <p class="input-description">
+              Paste your text here — up to 5,000 characters. Keep it concise;
+              we'll highlight likely AI patterns.
+            </p>
+            <!-- Upper textarea with button -->
+            <div class="input-wrapper">
+              <textarea id="textInput" rows="8" maxlength="5000" placeholder="Enter or paste your text here..."
+                class="text-input"></textarea>
+              <div class="character-count">
+                <span id="charCount">0</span>
+                <span>/5,000 characters</span>
+              </div>
+              <button id="textCheckBtn" class="btn btn-primary">Check Text</button>
+              <button id="plagiarismCheckBtn" class="btn btn-secondary">Check Plagiarism</button>
+
+            </div>
+
+            <div class="tip">
+              <p>
+                <span class="testing-text17">Tip:</span>
+                <span>
+                  For best results, paste a single article, essay, or
+                  paragraph rather than multiple documents.
+                </span>
+              </p>
+            </div>
+            <h2 class="section-title">Upload Your Image</h2>
+            <div class="upload-section">
+              <h2>Upload Image for AI Detection</h2>
+
+              <input type="file" id="imageInput" accept="image/*">
+              <label for="imageInput" id="uploadLabel">Choose Image</label>
+
+              <img id="preview" src="#" alt="Preview">
+              <button id="deleteBtn">Delete Image</button>
+              <div id="result"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="result-placeholder" class="testing-result-section result-section">
+        <div class="result-container">
+          <div class="result-content">
+            <div class="result-header">
+              <svg width="32" xmlns="http://www.w3.org/2000/svg" height="32" viewBox="0 0 24 24" class="result-icon">
+                <path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+              <h2 class="section-title">Analysis Complete</h2>
+            </div>
+            <div class="result-summary">
+              <h3 class="result-title">Clear, concise assessment:</h3>
+              <p class="result-text">
+                <span>
+                  This passage exhibits patterns commonly associated with
+                  AI-generated text.
+                </span>
+                <span class="testing-confidence">Confidence: moderate.</span>
+              </p>
+            </div>
+            <div class="result-details">
+              <h4>Key signals:</h4>
+              <ul class="signals-list">
+                <li><span>Uniform phrasing</span></li>
+                <li><span>Consistent tone</span></li>
+                <li><span>Limited personal detail</span></li>
+              </ul>
+            </div>
+            <div class="suggested-steps">
+              <h4>Suggested next steps:</h4>
+              <p>
+                Review for authenticity, add human-specific details, or run a
+                second opinion.
+              </p>
+              <p class="feedback-note">
+                If you believe this is human-written, submit feedback to
+                refine detection.
+              </p>
+            </div>
+            <button id="checkAnotherBtn" class="btn btn-outline">
+              Check Another Text
+            </button>
+          </div>
+        </div>
+      </section>
+      <section id="how-it-works" class="how-works-section">
+        <div class="how-works-container">
+          <h2 class="section-title">How It Works</h2>
+          <div class="how-works-grid">
+            <div class="step-card">
+              <div class="step-number"><span>01</span></div>
+              <h3>Local Analysis</h3>
+              <p>
+                This Testing page runs a lightweight, client-side check to
+                illustrate the workflow. Paste your text and tap Check Text —
+                the page performs a local analysis and returns a placeholder
+                result.
+              </p>
+            </div>
+            <div class="step-card">
+              <div class="step-number"><span>02</span></div>
+              <h3>Private Processing</h3>
+              <p>
+                No text leaves your browser and no backend services are
+                invoked. Your content remains completely private during the
+                analysis process.
+              </p>
+            </div>
+            <div class="step-card">
+              <div class="step-number"><span>03</span></div>
+              <h3>Instant Results</h3>
+              <p>
+                AIDetecto's prototype emphasizes transparency and privacy: the
+                check is immediate, private, and deterministic, so you can
+                evaluate the interface and flow before integration with
+                production-grade AI detection models.
+              </p>
+            </div>
+          </div>
+
+          <div class="why-matters">
+            <h3>Why this matters</h3>
+            <p>
+              AIDetecto's prototype emphasizes transparency and privacy: the
+              check is immediate, private, and deterministic, so you can
+              evaluate the interface and flow before integration with
+              production-grade AI detection models.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="faq" class="faq-section">
+        <div class="faq-container">
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <div class="faq-grid">
+            <div class="faq-item">
+              <h3>How accurate is the tester?</h3>
+              <p>
+                Our tester provides a rapid, heuristic assessment based on
+                surface-level patterns. It is designed for quick triage, not
+                definitive attribution. Use results as an indicator, not
+                proof.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h3>What types of text can I check?</h3>
+              <p>
+                Short-form and long-form prose, emails, articles, and social
+                posts. The tool focuses on English-language content and
+                performs best on coherent, complete passages.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h3>Does this detect a specific AI model?</h3>
+              <p>
+                No. This prototype signals likely AI-style patterns rather
+                than identifying a particular model or service.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h3>
+                Can I rely on the result for legal or academic decisions?
+              </h3>
+              <p>
+                No. Results are advisory and not admissible for formal
+                proceedings. For high-stakes decisions, pair this tool with
+                human review and forensic analysis.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h3>How is my text handled?</h3>
+              <p>
+                This prototype runs locally in your browser and does not send
+                your input to a server. In production, we recommend clear
+                data-handling policies and optional client-side checks to
+                preserve privacy.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h3>
+                Why did the tool mark human-written text as AI-generated?
+              </h3>
+              <p>
+                Automated assessments can misclassify creative, edited, or
+                formulaic writing. Common causes include polished stylistic
+                fingerprints, short samples, or domain-specific language.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h3>Will future versions be more reliable?</h3>
+              <p>
+                Yes. Our roadmap includes refined models, larger evaluation
+                sets, transparency reports, and integrations for rigorous
+                human-in-the-loop workflows.
+              </p>
+            </div>
+            <div class="faq-item">
+              <h3>How should I interpret the result?</h3>
+              <p>
+                Treat the output as a succinct signal: investigate further
+                when flagged, and contextualize findings with source, revision
+                history, and author verification.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="try-now" class="try-now-section">
+        <div class="try-now-container">
+          <div class="try-now-content">
+            <div class="try-now-text">
+              <h2 class="section-title">Try It Now</h2>
+              <p class="section-content">
+                Paste a passage—no sign-up, no friction. Run a quick check to
+                see if the text shows AI-generated patterns. Fast, focused,
+                reliable.
+              </p>
+            </div>
+            <div class="try-now-input">
+              <textarea id="quickTestInput" rows="4" placeholder="Paste your text here and press Check Text"
+                class="text-input"></textarea>
+              <button id="quickCheckBtn" class="btn btn-primary">
+                <svg width="20" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24">
+                  <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m21 21l-4.34-4.34"></path>
+                    <circle r="8" cx="11" cy="11"></circle>
+                  </g>
+                </svg>
+                <span>Check Text</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer-wrapper class="footer-wrapper">
+        <!--Footer component-->
+        <div class="footer-container1">
+          <div class="footer-container2">
+            <div class="footer-container3">
+              <style>
+                @media (prefers-reduced-motion: reduce) {
+
+                  .footer-social-link,
+                  .footer-nav-link,
+                  .footer-legal-link {
+                    transition: none;
+                  }
+
+                  .footer-social-link:hover {
+                    transform: none;
+                  }
+                }
+              </style>
+            </div>
+          </div>
+          <footer class="footer">
+            <div class="footer-container">
+              <div class="footer-main">
+                <div class="footer-brand">
+                  <div class="footer-logo">
+                    <svg width="24" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24">
+                      <path
+                        d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    </svg>
+                    <span class="footer-brand-name">AIDetecto</span>
+                  </div>
+                  <p class="footer-description">
+                    Advanced AI content detection technology for authentic
+                    communication.
+                  </p>
+                  <div class="footer-social">
+                    <a href="#">
+                      <div aria-label="Follow us on Twitter" class="footer-social-link">
+                        <svg width="24" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24">
+                          <path
+                            d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6c2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4c-.9-4.2 4-6.6 7-3.8c1.1 0 3-1.2 3-1.2"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        </svg>
+                      </div>
+                    </a>
+                    <a href="#">
+                      <div aria-label="Connect on LinkedIn" class="footer-social-link">
+                        <svg width="24" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24">
+                          <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path
+                              d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2a2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6M2 9h4v12H2z">
+                            </path>
+                            <circle r="2" cx="4" cy="4"></circle>
+                          </g>
+                        </svg>
+                      </div>
+                    </a>
+                    <a href="#">
+                      <div aria-label="View on GitHub" class="footer-social-link">
+                        <svg width="24" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24">
+                          <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path
+                              d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5c.08-1.25-.27-2.48-1-3.5c.28-1.15.28-2.35 0-3.5c0 0-1 0-3 1.5c-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5c-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4">
+                            </path>
+                            <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                          </g>
+                        </svg>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="footer-nav">
+                  <div class="footer-nav-column">
+                    <h3 class="footer-nav-title">Product</h3>
+                    <ul class="footer-nav-list">
+                      <li>
+                        <a href="index.html">
+                          <div class="footer-nav-link">
+                            <svg width="24" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24">
+                              <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+                                <path
+                                  d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z">
+                                </path>
+                              </g>
+                            </svg>
+                            <span>Home</span>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="testing.html.html">
+                          <div class="footer-nav-link">
+                            <span>AI Detection</span>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="footer-nav-link">
+                            <span>Features</span>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="footer-nav-link">
+                            <span>Pricing</span>
+                          </div>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="footer-nav-column">
+                    <h3 class="footer-nav-title">Support</h3>
+                    <ul class="footer-nav-list">
+                      <li>
+                        <a href="contact.html.html">
+                          <div class="footer-nav-link">
+                            <svg width="24" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24">
+                              <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="m22 7l-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
+                                <rect x="2" y="4" rx="2" width="20" height="16"></rect>
+                              </g>
+                            </svg>
+                            <span>Contact</span>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="footer-nav-link">
+                            <span>Documentation</span>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="footer-nav-link">
+                            <span>Help Center</span>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="footer-nav-link">
+                            <span>Status</span>
+                          </div>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="footer-nav-column">
+                    <h3 class="footer-nav-title">Company</h3>
+                    <ul class="footer-nav-list">
+                      <li>
+                        <a href="#">
+                          <div class="footer-nav-link">
+                            <span>About</span>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="footer-nav-link"><span>Blog</span></div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="footer-nav-link">
+                            <span>Careers</span>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="footer-nav-link">
+                            <span>Press</span>
+                          </div>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-bottom">
+                <div class="footer-legal">
+                  <p class="footer-copyright">
+                    &amp;copy; 2025 AIDetecto. All rights reserved.
+                  </p>
+                  <div class="footer-legal-links">
+                    <a href="#">
+                      <div class="footer-legal-link">
+                        <span>Privacy Policy</span>
+                      </div>
+                    </a>
+                    <span class="footer-divider">·</span>
+                    <a href="#">
+                      <div class="footer-legal-link">
+                        <span>Terms of Service</span>
+                      </div>
+                    </a>
+                    <span class="footer-divider">·</span>
+                    <a href="#">
+                      <div class="footer-legal-link">
+                        <span>Cookie Policy</span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </footer-wrapper>
+    </div>
+  </div>
+  <!-- Modal overlay -->
+  <div id="modalOverlay" style="display:none;"></div>
+  <!-- Modal popup -->
+  <div id="resultModal">Popup Message</div>
+
+  <script>
+    // Function to show modal popup
+    function showModal(message) {
+      const modal = document.getElementById("resultModal");
+      const overlay = document.getElementById("modalOverlay");
+
+      modal.textContent = message;
+      modal.style.display = "block";
+      overlay.style.display = "block";
+
+      // Auto-hide after 3 seconds
+      setTimeout(() => {
+        modal.style.display = "none";
+        overlay.style.display = "none";
+      }, 3000);
+    }
+
+    // Function to set up text check and character count
+    function setupTextArea(inputId, buttonId, charCountId, maxChars) {
+      const input = document.getElementById(inputId);
+      const button = document.getElementById(buttonId);
+      const charCount = charCountId ? document.getElementById(charCountId) : null;
+
+      // Update character count live
+      if (charCount) {
+        input.addEventListener("input", () => {
+          charCount.textContent = input.value.length;
+        });
+      }
+
+      // Button click event
+      button.addEventListener("click", async () => {
+        const text = input.value.trim();
+
+        if (!text) {
+          showModal("Please enter some text to check.");
+          return;
+        }
+
+        try {
+          const response = await fetch("http://127.0.0.1:8000/analyze", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text })
+          });
+
+          const data = await response.json();
+
+          if (data.error) {
+            showModal(`Error: ${data.error}`);
+          } else {
+            showModal(`AI Probability: ${data.ai_probability} | Confidence: ${data.confidence}`);
+          }
+        } catch (err) {
+          showModal("Error connecting to backend!");
+          console.error(err);
+        }
+      });
+    }
+
+    // Initialize upper textarea (with 5000 char limit)
+    setupTextArea("textInput", "textCheckBtn", "charCount", 5000);
+
+    // Initialize lower textarea (no character counter needed)
+    setupTextArea("quickTestInput", "quickCheckBtn");
+
+
+  </script>
+  <script>
+    const imageInput = document.getElementById('imageInput');
+    const preview = document.getElementById('preview');
+    const result = document.getElementById('result');
+    const uploadLabel = document.getElementById('uploadLabel');
+    const deleteBtn = document.getElementById('deleteBtn');
+
+    imageInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+          deleteBtn.style.display = 'inline-block';
+          uploadLabel.classList.add('disabled');
+          imageInput.disabled = true; // block upload
+          result.textContent = "Detecting...";
+
+          // Fake detection logic
+          setTimeout(() => {
+            const detection = Math.random() > 0.5 ? "AI-generated" : "Natural";
+            result.textContent = "Detected: " + detection;
+          }, 800);
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+
+    deleteBtn.addEventListener('click', function () {
+      preview.src = "#";
+      preview.style.display = 'none';
+      deleteBtn.style.display = 'none';
+      result.textContent = "";
+      imageInput.value = ""; // reset input
+      imageInput.disabled = false;
+      uploadLabel.classList.remove('disabled');
+    });
+  </script>
+  <script>
+    const plagiarismBtn = document.getElementById("plagiarismCheckBtn");
+    if (plagiarismBtn) {
+      plagiarismBtn.addEventListener("click", async function () {
+        const textInput = document.getElementById("textInput");
+        const text = textInput.value.trim();
+        if (!text) {
+          showModal("Please enter some text to check for plagiarism."); // reuse your modal function
+          return;
+        }
+        try {
+          const response = await fetch("http://127.0.0.1:8000/plagiarism", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text: text })
+          });
+          const data = await response.json();
+          if (data.error) {
+            showModal("Error: " + data.error);
+          } else {
+            showModal("Plagiarism Score: " + data.plagiarism_score + "\nDetails: " + JSON.stringify(data.plagiarism_details));
+          }
+        } catch (err) {
+          showModal("Error connecting to backend!");
+          console.error(err);
+        }
+      });
+    }
+
+  </script>
+</body>
+
+</html>

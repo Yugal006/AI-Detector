@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Cool Charming Rook</title>
+    <meta property="og:title" content="Cool Charming Rook" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;  -webkit-font-smoothing: antialiased;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;  color: inherit;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}pre {  white-space: normal;}input {  padding: 2px 4px;}img {  display: block;}details {  display: block;  margin: 0;  padding: 0;}summary::-webkit-details-marker {  display: none;}[data-thq="accordion"] [data-thq="accordion-content"] {  max-height: 0;  overflow: hidden;  transition: max-height 0.3s ease-in-out;  padding: 0;}[data-thq="accordion"] details[data-thq="accordion-trigger"][open] + [data-thq="accordion-content"] {  max-height: 1000vh;}details[data-thq="accordion-trigger"][open] summary [data-thq="accordion-icon"] {  transform: rotate(180deg);}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: "Nunito Sans";
+        font-size: 1rem;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: undefined;
+        text-transform: undefined;
+        letter-spacing: normal;
+        line-height: 1.55;
+        color: var(--color-on-surface);
+        background: var(--color-surface);
+
+        fill: var(--color-on-surface);
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/animate.css@4.1.1/animate.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+  </head>
+  <body>
+    <link rel="stylesheet" href="./style.css" />
+    <div>
+      <link href="./index.css" rel="stylesheet" />
+
+      <div class="home-container1">
+        <navigation-wrapper class="navigation-wrapper">
+          <!--Navigation component-->
+          <div class="navigation-container1">
+            <div class="navigation-container2">
+              <div class="navigation-container3">
+                <style>
+                  body {
+                    padding-top: 80px;
+                  }
+                  @media (max-width: 767px) {
+                  body {
+                    padding-top: 70px;
+                  }
+                  }
+                </style>
+              </div>
+            </div>
+            <div class="navigation-container4">
+              <div class="navigation-container5">
+                <script defer="" data-name="navigation">
+                  (function(){
+                    const navigationToggle = document.getElementById('navigationToggle')
+                    const navigationMenu = document.getElementById('navigationMenu')
+
+                    navigationToggle.addEventListener('click', function () {
+                      const isExpanded = navigationToggle.getAttribute('aria-expanded') === 'true'
+
+                      navigationToggle.setAttribute('aria-expanded', !isExpanded)
+
+                      if (!isExpanded) {
+                        navigationMenu.classList.add('navigation-menu--active')
+                      } else {
+                        navigationMenu.classList.remove('navigation-menu--active')
+                      }
+                    })
+
+                    // Close mobile menu when clicking on a link
+                    const navigationLinks = document.querySelectorAll('.navigation-link')
+                    navigationLinks.forEach((link) => {
+                      link.addEventListener('click', () => {
+                        navigationToggle.setAttribute('aria-expanded', 'false')
+                        navigationMenu.classList.remove('navigation-menu--active')
+                      })
+                    })
+
+                    // Close mobile menu when clicking outside
+                    document.addEventListener('click', function (event) {
+                      const isClickInsideNav =
+                        navigationMenu.contains(event.target) ||
+                        navigationToggle.contains(event.target)
+
+                      if (
+                        !isClickInsideNav &&
+                        navigationMenu.classList.contains('navigation-menu--active')
+                      ) {
+                        navigationToggle.setAttribute('aria-expanded', 'false')
+                        navigationMenu.classList.remove('navigation-menu--active')
+                      }
+                    })
+
+                    // Handle escape key for mobile menu
+                    document.addEventListener('keydown', function (event) {
+                      if (
+                        event.key === 'Escape' &&
+                        navigationMenu.classList.contains('navigation-menu--active')
+                      ) {
+                        navigationToggle.setAttribute('aria-expanded', 'false')
+                        navigationMenu.classList.remove('navigation-menu--active')
+                        navigationToggle.focus()
+                      }
+                    })
+                  })()
+                </script>
+              </div>
+            </div>
+            <nav id="navigation" class="navigation">
+              <div class="navigation-container">
+                <div class="navigation-brand">
+                  <a href="index.html">
+                    <div aria-label="AIDetecto Home" class="navigation-logo">
+                      <span class="navigation-logo-text">AIDetecto</span>
+                    </div>
+                  </a>
+                </div>
+                <div id="navigationMenu" class="navigation-menu">
+                  <ul class="navigation-links">
+                    <li class="navigation-item">
+                      <a href="testing.html">
+                        <div class="navigation-link"><span>Testing</span></div>
+                      </a>
+                    </li>
+                    <li class="navigation-item">
+                      <a href="contact.html">
+                        <div class="navigation-link">
+                          <span>Contact Us</span>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <button
+                  id="navigationToggle"
+                  aria-label="Toggle navigation menu"
+                  aria-controls="navigationMenu"
+                  aria-expanded="false"
+                  class="navigation-toggle"
+                >
+                  <span
+                    class="navigation-navigation-toggle-icon1 navigation-toggle-menu"
+                  >
+                    <svg
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M4 5h16M4 12h16M4 19h16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </span>
+                  <span class="navigation-navigation-toggle-icon2">
+                    <svg
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M18 6L6 18M6 6l12 12"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </span>
+                </button>
+              </div>
+            </nav>
+          </div>
+        </navigation-wrapper>
+        <div class="home-container2">
+          <div class="home-container3">
+            <style>
+                      @keyframes float {0%,100% {transform: translateY(0px) rotate(0deg);}
+              50% {transform: translateY(-20px) rotate(5deg);}}@keyframes fadeInUp {to {opacity: 1;
+              transform: translateY(0);}}@keyframes pulse {0%,100% {opacity: 1;}
+              50% {opacity: 0.5;}}
+            </style>
+          </div>
+        </div>
+        <div class="home-container4">
+          <div class="home-container5">
+            <style>
+              @media (prefers-reduced-motion: reduce) {
+              .floating-element {
+                animation: none;
+              }
+              .analysis-indicator svg {
+                animation: none;
+              }
+              .hero-content, .hero-visual {
+                animation: none;
+                opacity: 1;
+                transform: none;
+              }
+              * {
+                transition: none !important;
+              }
+              }
+            </style>
+          </div>
+        </div>
+        <div class="home-container6">
+          <div class="home-container7">
+            <script defer="" data-name="homepage-interactions">
+              (function(){
+                // Scroll-triggered animations
+                const observerOptions = {
+                  threshold: 0.1,
+                  rootMargin: '0px 0px -50px 0px',
+                }
+
+                const animateOnScroll = new IntersectionObserver((entries) => {
+                  entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                      entry.target.style.opacity = '1'
+                      entry.target.style.transform = 'translateY(0)'
+                    }
+                  })
+                }, observerOptions)
+
+                // Animate feature cards on scroll
+                const featureCards = document.querySelectorAll('.feature-card')
+                featureCards.forEach((card, index) => {
+                  card.style.opacity = '0'
+                  card.style.transform = 'translateY(2rem)'
+                  card.style.transition = `opacity 0.6s var(--animation-curve-primary) ${
+                    index * 0.1
+                  }s, transform 0.6s var(--animation-curve-primary) ${index * 0.1}s`
+                  animateOnScroll.observe(card)
+                })
+
+                // Animate sections on scroll
+                const sections = document.querySelectorAll('.intro, .get-started')
+                sections.forEach((section) => {
+                  const content = section.querySelector(
+                    '.intro-content, .get-started-content'
+                  )
+                  if (content) {
+                    content.style.opacity = '0'
+                    content.style.transform = 'translateY(1rem)'
+                    content.style.transition =
+                      'opacity 0.8s var(--animation-curve-primary), transform 0.8s var(--animation-curve-primary)'
+                    animateOnScroll.observe(content)
+                  }
+                })
+
+                // Smooth scroll behavior for anchor links
+                document.querySelectorAll('a[href^='#']').forEach((anchor) => {
+                  anchor.addEventListener('click', function (e) {
+                    e.preventDefault()
+                    const target = document.querySelector(this.getAttribute('href'))
+                    if (target) {
+                      target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                      })
+                    }
+                  })
+                })
+
+                // Enhanced hover effects for interactive elements
+                const interactiveElements = document.querySelectorAll(
+                  '.feature-card, .preview-window'
+                )
+                interactiveElements.forEach((element) => {
+                  element.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-8px)'
+                  })
+
+                  element.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0)'
+                  })
+                })
+
+                // Keyboard navigation enhancement
+                document.addEventListener('keydown', function (e) {
+                  if (e.key === 'Tab') {
+                    document.body.classList.add('using-keyboard')
+                  }
+                })
+
+                document.addEventListener('mousedown', function () {
+                  document.body.classList.remove('using-keyboard')
+                })
+              })()
+            </script>
+          </div>
+        </div>
+        <main class="homepage">
+          <section id="hero" class="hero">
+            <div class="hero-background">
+              <img
+                alt="Abstract neural network visualization"
+                src="https://images.pexels.com/photos/17486100/pexels-photo-17486100.png?auto=compress&amp;cs=tinysrgb&amp;h=650&amp;w=940"
+                class="hero-bg-image"
+              />
+              <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-container">
+              <div class="hero-content">
+                <h1 class="hero-title">Welcome to AIDetecto</h1>
+                <p class="hero-subtitle">Clarity for the content age</p>
+                <div class="hero-description">
+                  <p class="section-content">
+                    AI Detector: reliable, lightweight analysis that helps teams
+                    and investors trust what they read.
+                  </p>
+                </div>
+                <div class="hero-actions">
+                  <a href="#get-started">
+                    <div class="btn btn-primary">
+                      <span>Try Detection</span>
+                    </div>
+                  </a>
+                  <a href="#features">
+                    <div class="btn btn-outline"><span>Learn More</span></div>
+                  </a>
+                </div>
+              </div>
+              <div class="hero-visual">
+                <div class="floating-element">
+                  <svg
+                    width="48"
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="48"
+                    viewBox="0 0 24 24"
+                    class="detection-icon"
+                  >
+                    <path
+                      d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="intro" class="intro">
+            <div class="intro-container">
+              <div class="intro-content">
+                <h2 class="section-title">Transparent AI Detection</h2>
+                <div class="intro-text">
+                  <p class="section-content">
+                    AIDetecto is a lightweight AI-detection prototype designed
+                    to show how responsible, transparent tools can help teams
+                    and investors evaluate written content.
+                  </p>
+                  <p class="section-content">
+                    We aim to provide clear, instantaneous signals about text
+                    origin—helping product managers, researchers, and
+                    decision-makers assess risk, audit outputs, and make
+                    trustable choices without fuss or noise.
+                  </p>
+                </div>
+              </div>
+              <div class="intro-visual">
+                <div class="detection-preview">
+                  <div class="preview-window">
+                    <div class="preview-header">
+                      <span class="preview-title">Detection Analysis</span>
+                    </div>
+                    <div class="preview-content">
+                      <div class="analysis-indicator">
+                        <svg
+                          width="24"
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="24"
+                          viewBox="0 0 24 24"
+                        >
+                          <g
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path
+                              d="M2.062 12.348a1 1 0 0 1 0-.696a10.75 10.75 0 0 1 19.876 0a1 1 0 0 1 0 .696a10.75 10.75 0 0 1-19.876 0"
+                            ></path>
+                            <circle r="3" cx="12" cy="12"></circle>
+                          </g>
+                        </svg>
+                        <span>Analyzing...</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="features" class="features">
+            <div class="features-container">
+              <header class="features-header">
+                <h2 class="section-title">Core Capabilities</h2>
+              </header>
+              <div class="features-grid">
+                <article class="feature-card">
+                  <div class="feature-icon">
+                    <svg
+                      width="32"
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="32"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </div>
+                  <h3 class="feature-title">Lightweight Prototype</h3>
+                  <p class="feature-description">
+                    A focused, client-side demonstration of core AI detection
+                    flows — no backend, no clutter. Ideal for rapid investor
+                    demos and early user testing.
+                  </p>
+                </article>
+                <article class="feature-card">
+                  <div class="feature-icon">
+                    <svg
+                      width="32"
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="32"
+                      viewBox="0 0 24 24"
+                    >
+                      <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path
+                          d="M2.062 12.348a1 1 0 0 1 0-.696a10.75 10.75 0 0 1 19.876 0a1 1 0 0 1 0 .696a10.75 10.75 0 0 1-19.876 0"
+                        ></path>
+                        <circle r="3" cx="12" cy="12"></circle>
+                      </g>
+                    </svg>
+                  </div>
+                  <h3 class="feature-title">Precision Analysis</h3>
+                  <p class="feature-description">
+                    Paste text, click Check Text, and receive an immediate,
+                    clear assessment. Shows the intended UX and decision logic
+                    without infrastructure overhead.
+                  </p>
+                </article>
+                <article class="feature-card">
+                  <div class="feature-icon">
+                    <svg
+                      width="32"
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="32"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="m16 18l6-6l-6-6M8 6l-6 6l6 6"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </div>
+                  <h3 class="feature-title">Transparent Mechanics</h3>
+                  <p class="feature-description">
+                    Simple, auditable JavaScript interactions illustrate how
+                    detection triggers and results are presented — perfect for
+                    technical review and product refinement.
+                  </p>
+                </article>
+                <article class="feature-card">
+                  <div class="feature-icon">
+                    <svg
+                      width="32"
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="32"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </div>
+                  <h3 class="feature-title">Design-led Clarity</h3>
+                  <p class="feature-description">
+                    Minimal UI components emphasize signal over noise — readable
+                    typography, calm spacing, and a single, decisive CTA to
+                    guide conversions.
+                  </p>
+                </article>
+                <article class="feature-card">
+                  <div class="feature-icon">
+                    <svg
+                      width="32"
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="32"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="m5 12l7-7l7 7m-7 7V5"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </div>
+                  <h3 class="feature-title">Investor-ready Metrics</h3>
+                  <p class="feature-description">
+                    Built to integrate real analytics later — the prototype maps
+                    where engagement and accuracy metrics will be captured to
+                    demonstrate growth potential.
+                  </p>
+                </article>
+                <article class="feature-card">
+                  <div class="feature-icon">
+                    <svg
+                      width="32"
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="32"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M20 6L9 17l-5-5"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </div>
+                  <h3 class="feature-title">User-first Accessibility</h3>
+                  <p class="feature-description">
+                    Keyboard-friendly controls and clear labels ensure the
+                    prototype communicates inclusivity and quality from the
+                    first interaction.
+                  </p>
+                </article>
+              </div>
+            </div>
+          </section>
+          <section id="get-started" class="get-started">
+            <div class="get-started-container">
+              <div class="get-started-content">
+                <h2 class="section-title">Get Started</h2>
+                <p class="section-content">
+                  Try the detector in seconds. Visit the Testing page to paste
+                  text and run a quick, client-side check. No signup, no noise —
+                  just a clear, immediate result to help you evaluate content
+                  authenticity.
+                </p>
+                <p class="section-content">
+                  Prefer the code? View the project notes and minimal source to
+                  see how the prototype is built with plain HTML, CSS, and
+                  vanilla JavaScript. Lightweight, auditable, and designed for
+                  rapid iteration.
+                </p>
+                <div class="get-started-actions">
+                  <a href="testing.html">
+                    <div class="btn btn-lg btn-primary">
+                      <span>Go to Testing</span>
+                    </div>
+                  </a>
+                  <a href="#">
+                    <div class="btn btn-lg btn-outline">
+                      <span>View Code Notes</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+        <footer-wrapper class="footer-wrapper">
+          <!--Footer component-->
+          <div class="footer-container1">
+            <div class="footer-container2">
+              <div class="footer-container3">
+                <style>
+                  @media (prefers-reduced-motion: reduce) {
+                  .footer-social-link, .footer-nav-link, .footer-legal-link {
+                    transition: none;
+                  }
+                  .footer-social-link:hover {
+                    transform: none;
+                  }
+                  }
+                </style>
+              </div>
+            </div>
+            <footer class="footer">
+              <div class="footer-container">
+                <div class="footer-main">
+                  <div class="footer-brand">
+                    <div class="footer-logo">
+                      <svg
+                        width="24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                      <span class="footer-brand-name">AIDetecto</span>
+                    </div>
+                    <p class="footer-description">
+                      Advanced AI content detection technology for authentic
+                      communication.
+                    </p>
+                    <div class="footer-social">
+                      <a href="#">
+                        <div
+                          aria-label="Follow us on Twitter"
+                          class="footer-social-link"
+                        >
+                          <svg
+                            width="24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="24"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6c2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4c-.9-4.2 4-6.6 7-3.8c1.1 0 3-1.2 3-1.2"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            ></path>
+                          </svg>
+                        </div>
+                      </a>
+                      <a href="#">
+                        <div
+                          aria-label="Connect on LinkedIn"
+                          class="footer-social-link"
+                        >
+                          <svg
+                            width="24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="24"
+                            viewBox="0 0 24 24"
+                          >
+                            <g
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path
+                                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2a2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6M2 9h4v12H2z"
+                              ></path>
+                              <circle r="2" cx="4" cy="4"></circle>
+                            </g>
+                          </svg>
+                        </div>
+                      </a>
+                      <a href="#">
+                        <div
+                          aria-label="View on GitHub"
+                          class="footer-social-link"
+                        >
+                          <svg
+                            width="24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="24"
+                            viewBox="0 0 24 24"
+                          >
+                            <g
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path
+                                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5c.08-1.25-.27-2.48-1-3.5c.28-1.15.28-2.35 0-3.5c0 0-1 0-3 1.5c-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5c-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4"
+                              ></path>
+                              <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                            </g>
+                          </svg>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="footer-nav">
+                    <div class="footer-nav-column">
+                      <h3 class="footer-nav-title">Product</h3>
+                      <ul class="footer-nav-list">
+                        <li>
+                          <a href="index.html">
+                            <div class="footer-nav-link">
+                              <svg
+                                width="24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="24"
+                                viewBox="0 0 24 24"
+                              >
+                                <g
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                >
+                                  <path
+                                    d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"
+                                  ></path>
+                                  <path
+                                    d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                                  ></path>
+                                </g>
+                              </svg>
+                              <span>Home</span>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="testing.html.html">
+                            <div class="footer-nav-link">
+                              <span>AI Detection</span>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <div class="footer-nav-link">
+                              <span>Features</span>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <div class="footer-nav-link">
+                              <span>Pricing</span>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="footer-nav-column">
+                      <h3 class="footer-nav-title">Support</h3>
+                      <ul class="footer-nav-list">
+                        <li>
+                          <a href="contact.html.html">
+                            <div class="footer-nav-link">
+                              <svg
+                                width="24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="24"
+                                viewBox="0 0 24 24"
+                              >
+                                <g
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                >
+                                  <path
+                                    d="m22 7l-8.991 5.727a2 2 0 0 1-2.009 0L2 7"
+                                  ></path>
+                                  <rect
+                                    x="2"
+                                    y="4"
+                                    rx="2"
+                                    width="20"
+                                    height="16"
+                                  ></rect>
+                                </g>
+                              </svg>
+                              <span>Contact</span>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <div class="footer-nav-link">
+                              <span>Documentation</span>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <div class="footer-nav-link">
+                              <span>Help Center</span>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <div class="footer-nav-link">
+                              <span>Status</span>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="footer-nav-column">
+                      <h3 class="footer-nav-title">Company</h3>
+                      <ul class="footer-nav-list">
+                        <li>
+                          <a href="#">
+                            <div class="footer-nav-link">
+                              <span>About</span>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <div class="footer-nav-link"><span>Blog</span></div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <div class="footer-nav-link">
+                              <span>Careers</span>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <div class="footer-nav-link">
+                              <span>Press</span>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-bottom">
+                  <div class="footer-legal">
+                    <p class="footer-copyright">
+                      &amp;copy; 2025 AIDetecto. All rights reserved.
+                    </p>
+                    <div class="footer-legal-links">
+                      <a href="#">
+                        <div class="footer-legal-link">
+                          <span>Privacy Policy</span>
+                        </div>
+                      </a>
+                      <span class="footer-divider">·</span>
+                      <a href="#">
+                        <div class="footer-legal-link">
+                          <span>Terms of Service</span>
+                        </div>
+                      </a>
+                      <span class="footer-divider">·</span>
+                      <a href="#">
+                        <div class="footer-legal-link">
+                          <span>Cookie Policy</span>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </footer>
+          </div>
+        </footer-wrapper>
+      </div>
+    </div>
+  </body>
+</html>
